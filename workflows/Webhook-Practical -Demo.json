@@ -1,0 +1,194 @@
+{
+  "name": "Webhook-Practical -Demo",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "cd4e62c8-35e6-4c24-a71a-c43f8e11eca5",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "4fa856e7-54fc-4e2e-a508-fd367a20f12f",
+      "name": "Webhook",
+      "webhookId": "cd4e62c8-35e6-4c24-a71a-c43f8e11eca5"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4fedf177-4923-482f-bcc0-a7cb0bb2c964",
+              "name": "customerName",
+              "value": "={{ $json.body.customerName }}",
+              "type": "string"
+            },
+            {
+              "id": "e3db520a-96e4-4dcc-bad2-998a982f4e40",
+              "name": "enquiry",
+              "value": "={{ $json.body.enquiry }}",
+              "type": "string"
+            },
+            {
+              "id": "1153cdf4-39d6-447f-bb8d-58657b4250a5",
+              "name": "source",
+              "value": "={{ $json.body.source }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "ba432385-94a1-4d79-99a8-27b46a9ba788",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "8586828a-5bcc-419a-ab5a-d434b12860d2",
+              "leftValue": "={{ $json.enquiry }}",
+              "rightValue": "price",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        448,
+        0
+      ],
+      "id": "0ae8e829-c978-4e07-bb76-cd928e16bd76",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ffd5fa3a-93ce-494f-bd43-482a52991dc5",
+              "name": "intent",
+              "value": "Price Enquiry",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        672,
+        -96
+      ],
+      "id": "e8122fec-8a43-4173-ae67-c55a455d6cd8",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f42e7433-78b2-4edb-92e8-f3528b568eae",
+              "name": "intent",
+              "value": "Other Enquiry",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        672,
+        96
+      ],
+      "id": "9a5c43bf-b737-4165-bd24-2a409974df95",
+      "name": "Edit Fields2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "cfe31d25-67ec-4ebd-9bd3-8c5f7632f1c0",
+  "meta": {
+    "instanceId": "1e261049bb847df06a0c4e2088760ebdb8a0fe3ebf94be60688e9b446c3fc6b1"
+  },
+  "nodeGroups": [],
+  "id": "uxPd2BclvDdTPl3d",
+  "tags": []
+}

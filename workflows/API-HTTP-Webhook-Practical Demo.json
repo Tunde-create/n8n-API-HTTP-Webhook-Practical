@@ -1,0 +1,142 @@
+{
+  "name": "API-HTTP-Webhook-Practical Demo",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ced29d24-5cef-48c0-aea3-efb95e6bd8b9",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://jsonplaceholder.typicode.com/users/1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        224,
+        0
+      ],
+      "id": "40407905-a00c-4fe8-b4df-9f63682b3bf8",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://jsonplaceholder.typicode.com/posts",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "SmartBuy Lagos Customer Enquiry"
+            },
+            {
+              "name": "body",
+              "value": "Customer wants to know the price of Samsung Galaxy A55"
+            },
+            {
+              "name": "userId",
+              "value": "1"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "b0d82122-2239-43cf-8b22-946406ab5124",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://tee-creations.app.n8n.cloud/webhook-test/cd4e62c8-35e6-4c24-a71a-c43f8e11eca5",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "customerName",
+              "value": "Chinedu  Okafor"
+            },
+            {
+              "name": "enquiry",
+              "value": "what is the price of samsung Galaxy A55?"
+            },
+            {
+              "name": "source",
+              "value": "SmartBuy  Lagos"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        672,
+        0
+      ],
+      "id": "03086d61-aac1-4861-95f7-7e964845ded9",
+      "name": "HTTP Request2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d02363e0-d0ea-4660-8d43-6193cdbad6b1",
+  "meta": {
+    "instanceId": "1e261049bb847df06a0c4e2088760ebdb8a0fe3ebf94be60688e9b446c3fc6b1"
+  },
+  "nodeGroups": [],
+  "id": "ntnlpbqsXl5XJwb0",
+  "tags": []
+}
